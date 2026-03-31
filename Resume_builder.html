@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - Ajay Pal</title>
+      <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- LEFT SIDE: FORM EDITOR -->
+        <div class="editor">
+            <div class="editor-header">
+                <h1>Resume Builder</h1>
+                <p>Fill in your details below</p>
+            </div>
+            
+            <div class="editor-content">
+                <!-- PERSONAL INFO -->
+                <div class="form-section">
+                    <div class="section-title">Personal Information</div>
+                    
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="fullName" value="Ajay Pal" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="email" placeholder="your.email@example.com" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="location" placeholder="City, State" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn URL</label>
+                            <input type="text" id="linkedin" placeholder="linkedin.com/in/yourprofile" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Professional Summary</label>
+                        <textarea id="summary" oninput="updatePreview()" placeholder="2-3 sentences about yourself...">B.Tech Computer Science Engineering student (2023-2027) with strong knowledge of frontend development including HTML, CSS, JavaScript, and React.</textarea>
+                    </div>
+                </div>
+                
+                <!-- EDUCATION -->
+                <div class="form-section">
+                    <div class="section-title">Education</div>
+                    
+                    <div class="form-group">
+                        <label>Degree *</label>
+                        <input type="text" id="degree" value="B.Tech (Bachelor of Technology)" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Field of Study *</label>
+                        <input type="text" id="field" value="Computer Science Engineering" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group">
+                            <label>University *</label>
+                            <input type="text" id="university" value="Uttranchal University" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>Graduation Year *</label>
+                            <input type="text" id="gradYear" value="2027" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>CGPA/GPA</label>
+                        <input type="text" id="gpa" placeholder="8.5/10" oninput="updatePreview()">
+                    </div>
+                </div>
+                
+                <!-- SKILLS -->
+                <div class="form-section">
+                    <div class="section-title">Technical Skills</div>
+                    
+                    <div class="form-group">
+                        <label>Frontend</label>
+                        <input type="text" id="frontend" value="HTML, CSS, JavaScript, React" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Backend/Languages</label>
+                        <input type="text" id="backend" placeholder="Python, Node.js, Java" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tools & Technologies</label>
+                        <input type="text" id="tools" value="Git, VS Code" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Core Concepts</label>
+                        <input type="text" id="concepts" value="Responsive Design, Web Development" oninput="updatePreview()">
+                    </div>
+                </div>
+                
+                <!-- PROJECTS -->
+                <div class="form-section">
+                    <div class="section-title">Projects</div>
+                    <div id="projectsContainer"></div>
+                    <button class="add-btn" onclick="addProject()">+ Add Project</button>
+                </div>
+                
+                <!-- INTERNSHIPS -->
+                <div class="form-section">
+                    <div class="section-title">Internships & Experience</div>
+                    <div id="internshipsContainer"></div>
+                    <button class="add-btn" onclick="addInternship()">+ Add Internship</button>
+                </div>
+                
+                <!-- CERTIFICATIONS -->
+                <div class="form-section">
+                    <div class="section-title">Certifications</div>
+                    <div id="certificationsContainer"></div>
+                    <button class="add-btn" onclick="addCertification()">+ Add Certification</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RIGHT SIDE: PREVIEW -->
+        <div class="preview">
+            <div class="resume-container">
+                <!-- HEADER -->
+                <div class="resume-header">
+                    <div class="resume-name" id="previewName">Ajay Pal</div>
+                    <div class="resume-contact">
+                        <span id="previewPhone"></span>
+                        <span id="previewEmail"></span>
+                        <span id="previewLocation"></span>
+                        <span id="previewLinkedin"></span>
+                    </div>
+                </div>
+                
+                <!-- SUMMARY -->
+                <div class="resume-section" id="summarySection" style="display:none;">
+                    <div class="resume-section-title">Professional Summary</div>
+                    <div id="previewSummary"></div>
+                </div>
+                
+                <!-- EDUCATION -->
+                <div class="resume-section">
+                    <div class="resume-section-title">Education</div>
+                    <div class="resume-entry">
+                        <div class="resume-entry-header">
+                            <span id="previewDegree">B.Tech</span>
+                            <span id="previewGradYear">2027</span>
+                        </div>
+                        <div class="resume-entry-subtitle">
+                            <span id="previewField">Computer Science</span> | <span id="previewUniversity">Uttranchal University</span> <span id="previewGpaDisplay"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SKILLS -->
+                <div class="resume-section">
+                    <div class="resume-section-title">Technical Skills</div>
+                    <div class="skill-row">
+                        <span class="skill-label"><strong>Frontend:</strong></span>
+                        <span class="skill-content" id="previewFrontend">HTML, CSS, JavaScript, React</span>
+                    </div>
+                    <div class="skill-row" id="backendRow" style="display:none;">
+                        <span class="skill-label"><strong>Backend:</strong></span>
+                        <span class="skill-content" id="previewBackend"></span>
+                    </div>
+                    <div class="skill-row" id="toolsRow" style="display:none;">
+                        <span class="skill-label"><strong>Tools:</strong></span>
+                        <span class="skill-content" id="previewTools"></span>
+                    </div>
+                    <div class="skill-row" id="conceptsRow" style="display:none;">
+                        <span class="skill-label"><strong>Concepts:</strong></span>
+                        <span class="skill-content" id="previewConcepts"></span>
+                    </div>
+                </div>
+                
+                <!-- PROJECTS -->
+                <div class="resume-section" id="projectsSection" style="display:none;">
+                    <div class="resume-section-title">Projects</div>
+                    <div id="previewProjects"></div>
+                </div>
+                
+                <!-- INTERNSHIPS -->
+                <div class="resume-section" id="internshipsSection" style="display:none;">
+                    <div class="resume-section-title">Internships & Experience</div>
+                    <div id="previewInternships"></div>
+                </div>
+                
+                <!-- CERTIFICATIONS -->
+                <div class="resume-section" id="certificationsSection" style="display:none;">
+                    <div class="resume-section-title">Certifications</div>
+                    <div id="previewCertifications"></div>
+                </div>
+            </div>
+            
+            <button class="download-btn" onclick="downloadPDF()">📥 Download as PDF</button>
+        </div>
+    </div>
+    
+    <script src="script.js"> </script>
+</body>
+</html>
